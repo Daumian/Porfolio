@@ -10,6 +10,10 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
+  <script>
+    // Aplica el tema guardado antes de pintar la página (evita parpadeo)
+    try { var t = localStorage.getItem('theme'); if (t) document.documentElement.dataset.theme = t; } catch (e) {}
+  </script>
 </head>
 <body>
 
@@ -21,6 +25,7 @@
       <a href="#contacto">Contacto</a>
       <a href="https://sites.google.com/view/porfoliodruiz/reviews" target="_blank" rel="noopener">Reviews</a>
     </nav>
+    <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Cambiar modo claro/oscuro" title="Cambiar modo claro/oscuro">🌙</button>
   </header>
 
   <main>
@@ -33,7 +38,8 @@
         <p>Algo que me define es la <strong>capacitación constante</strong>, tanto en <strong>Hard</strong> como <strong>Soft Skills</strong>.</p>
       </div>
       <div class="hero-photo">
-        <img src="img/perfil.png" alt="Foto de Damián Ruiz">
+        <img class="foto-claro" src="img/perfil.png" alt="Foto de Damián Ruiz">
+        <img class="foto-oscuro" src="img/perfil-oscuro.jpg" alt="Foto de Damián Ruiz">
         <div class="socials">
           <a href="https://linkedin.com/in/odruiz" target="_blank" rel="noopener" aria-label="LinkedIn" class="s-in">
             <svg viewBox="0 0 24 24"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9h4v12H3zM9 9h3.8v1.7h.05c.53-1 1.83-2.05 3.77-2.05C20.6 8.65 21 11.3 21 14.7V21h-4v-5.6c0-1.33-.02-3.05-1.86-3.05-1.86 0-2.14 1.45-2.14 2.95V21H9z"/></svg>
@@ -116,5 +122,24 @@
   </main>
 
   <footer>© Damián Ruiz</footer>
+
+  <script>
+    // Botón de modo claro / oscuro
+    (function () {
+      var root = document.documentElement;
+      var btn = document.getElementById('theme-toggle');
+      function isDark() {
+        return root.dataset.theme ? root.dataset.theme === 'dark'
+          : window.matchMedia('(prefers-color-scheme: dark)').matches;
+      }
+      function paint() { btn.textContent = isDark() ? '☀️' : '🌙'; }
+      btn.addEventListener('click', function () {
+        root.dataset.theme = isDark() ? 'light' : 'dark';
+        try { localStorage.setItem('theme', root.dataset.theme); } catch (e) {}
+        paint();
+      });
+      paint();
+    })();
+  </script>
 </body>
 </html>
