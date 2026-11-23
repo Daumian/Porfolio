@@ -10,6 +10,10 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
+  <script>
+    // Aplica el tema guardado antes de pintar la página (evita parpadeo)
+    try { var t = localStorage.getItem('theme'); if (t) document.documentElement.dataset.theme = t; } catch (e) {}
+  </script>
 </head>
 <body>
 
@@ -21,6 +25,7 @@
       <a href="#contacto">Contacto</a>
       <a href="https://sites.google.com/view/porfoliodruiz/reviews" target="_blank" rel="noopener">Reviews</a>
     </nav>
+    <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Cambiar modo claro/oscuro" title="Cambiar modo claro/oscuro">🌙</button>
   </header>
 
   <main>
@@ -116,5 +121,24 @@
   </main>
 
   <footer>© Damián Ruiz</footer>
+
+  <script>
+    // Botón de modo claro / oscuro
+    (function () {
+      var root = document.documentElement;
+      var btn = document.getElementById('theme-toggle');
+      function isDark() {
+        return root.dataset.theme ? root.dataset.theme === 'dark'
+          : window.matchMedia('(prefers-color-scheme: dark)').matches;
+      }
+      function paint() { btn.textContent = isDark() ? '☀️' : '🌙'; }
+      btn.addEventListener('click', function () {
+        root.dataset.theme = isDark() ? 'light' : 'dark';
+        try { localStorage.setItem('theme', root.dataset.theme); } catch (e) {}
+        paint();
+      });
+      paint();
+    })();
+  </script>
 </body>
 </html>
