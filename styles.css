@@ -77,9 +77,17 @@ section { padding: 4rem 0 1.5rem; scroll-margin-top: 80px; }
 .hero-text { flex: 1 1 380px; max-width: 580px; font-size: 1.15rem; }
 .hero-photo { flex: 0 1 380px; display: flex; flex-direction: column; align-items: center; gap: 1rem; }
 .hero-photo > img {
-  width: 300px; aspect-ratio: 1; object-fit: cover; object-position: 50% 15%;
+  width: 300px; aspect-ratio: 1; object-fit: cover; object-position: 50% 20%;
   border-radius: 50%; background: #fff;
   border: 4px solid var(--accent); box-shadow: 0 8px 24px var(--shadow);
+}
+/* Una foto para cada modo */
+.foto-oscuro { display: none; }
+:root[data-theme="dark"] .foto-claro { display: none; }
+:root[data-theme="dark"] .foto-oscuro { display: block; }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .foto-claro { display: none; }
+  :root:not([data-theme="light"]) .foto-oscuro { display: block; }
 }
 .socials, .contact-row { display: flex; gap: .6rem; align-items: center; justify-content: center; }
 .socials a, .contact-row a.s-in {
