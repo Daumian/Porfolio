@@ -1,3 +1,19 @@
+/* Fuentes locales (antes se bajaban de Google Fonts y se veía Arial un instante) */
+@font-face {
+  font-family: "Oswald";
+  src: url("fonts/oswald.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: block; /* espera la fuente en vez de mostrar otra */
+}
+@font-face {
+  font-family: "Roboto";
+  src: url("fonts/roboto.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
   --bg: #ffffff;
   --text: #212121;
